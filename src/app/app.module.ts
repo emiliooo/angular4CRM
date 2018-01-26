@@ -6,18 +6,19 @@ import { CarsModule } from './cars/cars.module';
 import { CarsService } from './cars/cars.service';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,       //// tutaj_moduly;
     FormsModule,
     HttpModule,
-    CarsModule
+    CarsModule,
+    CoreModule
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]

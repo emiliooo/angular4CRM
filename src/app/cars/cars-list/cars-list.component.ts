@@ -6,8 +6,9 @@ import { CarsService } from '../cars.service';
 @Component({
   selector: 'app-cars-list',
   templateUrl: './cars-list.component.html',
-  styleUrls: ['./cars-list.component.less']
-})
+  styleUrls: ['./cars-list.component.less'],
+  providers: [CarsService]
+}) 
 export class CarsListComponent implements OnInit {
   @ViewChild("totalcostRef") totalcostRef: TotalCostComponent; // wywoluje metode zagniezdzona
 
