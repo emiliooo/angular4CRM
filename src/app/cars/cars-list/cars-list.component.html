@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <table *ngIf="cars.length > 0 ;else noCarsInfo"   class="cs-table table table-striped">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>model</th>
+            <th>cost</th>
+            <th>deliveryDate</th>
+            <th>plate</th>
+            <th>firstName</th>
+            <th>lastname</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id   }}</td>
+            <td> {{ car.model }}</td>
+            <td> {{ car.cost }}</td>
+            <td> {{ car.deliveryDate }}</td>
+            <td> {{ car.plate }}</td>
+            <td> {{ car.client.firstName }}</td>
+            <td> {{ car.client.surname }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noCarsInfo>
+    <p>brak samochodów </p>
+  </ng-template>
+
+  <app-total-cost  #totalcostRef [totalCost] = "totalCost" (shownGross)="shownGross($event)" ></app-total-cost>
+    <button (click) = showGross()>showGross</button>
+    <p>{{ grossCost  }}</p>
+</div>
