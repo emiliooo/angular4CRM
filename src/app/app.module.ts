@@ -7,6 +7,9 @@ import { CarsService } from './cars/cars.service';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { RouterModule } from '../../node_modules/@angular/router/';
+import { AppRoutingModule } from './app-routing.module';
+import { CarsRoutingModule } from './cars/cars-routing.module';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     HttpModule,
     CarsModule,
-    CoreModule
+    CoreModule,
+    AppRoutingModule,
+    CarsRoutingModule
+
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]
