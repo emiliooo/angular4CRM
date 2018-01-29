@@ -1,18 +1,17 @@
-
 <app-header>
-    <div header>
-        <p>CARS</p>
-     </div>
-    <div othercontent>
-       <p>Cars lists in services</p>
-    </div>
+  <div header>
+    <p>CARS</p>
+  </div>
+  <div othercontent>
+    <p>Cars lists in services</p>
+  </div>
 </app-header>
 
 
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <table *ngIf="cars.length > 0 ;else noCarsInfo"   class="cs-table table table-striped">
+      <table *ngIf="cars.length > 0 ;else noCarsInfo" class="cs-table table table-striped">
         <thead>
           <tr>
             <th>id</th>
@@ -25,8 +24,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let car of cars">
-            <td [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id   }}</td>
+          <tr *ngFor="let car of cars" class="row-car" (click)="goToCarDetails(car)">
+            <td [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id }}</td>
             <td> {{ car.model }}</td>
             <td> {{ car.cost }}</td>
             <td> {{ car.deliveryDate }}</td>
@@ -39,10 +38,64 @@
     </div>
   </div>
   <ng-template #noCarsInfo>
-    <p>brak samochodów </p> 
+    <p>brak samochodów </p>
   </ng-template>
 
-  <app-total-cost  #totalcostRef [totalCost] = "totalCost" (shownGross)="shownGross($event)" ></app-total-cost>
-    <button (click) = showGross()>showGross</button>
-    <p>{{ grossCost  }}</p>
+  <app-total-cost #totalcostRef [totalCost]="totalCost" (shownGross)="shownGross($event)"></app-total-cost>
+  <!-- <button (click)=s howGross()>showGross</button>
+  <p>{{ grossCost }}</p> -->
+</div>
+
+<div class="data-header">Add a new car</div>
+
+<div class="data-container">
+  <form [formGroup]="carForm">
+    <div class="row form-group">
+      <div class="col-sm-4">
+        <label for="">Modal</label>
+        <input formControlName="model" type="text" class="form-control" placeholder="model">
+      </div>
+      <div class="col-sm-4">
+        <label for="">type</label>
+        <input formControlName="type" type="text" class="form-control" placeholder="type">
+      </div>
+      <div class="col-sm-4">
+        <label for="">plate</label>
+        <input formControlName="plate" type="text" class="form-control" placeholder="plate">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-4">
+        <label for="">deliveryDate</label>
+        <input formControlName="deliveryDate" type="text" class="form-control" placeholder="deliveryDate">
+      </div>
+      <div class="col-sm-4">
+        <label for="">deadline</label>
+        <input formControlName="deadline" type="text" class="form-control" placeholder="deadline">
+      </div>
+      <div class="col-sm-4">
+        <label for="">color</label>
+        <input formControlName="color" type="text" class="form-control" placeholder="color">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-4">
+        <label for="">power</label>
+        <input formControlName="power" type="text" class="form-control" placeholder="power">
+      </div>
+      <div class="col-sm-4">
+        <label for="">clientFirstName</label>
+        <input formControlName="clientFirstName" type="text" class="form-control" placeholder="clientFirstName">
+      </div>
+      <div class="col-sm-4">
+        <label for="">clientSurname</label>
+        <input formControlName="clientSurname" type="text" class="form-control" placeholder="clientSurname">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary float-right">Add car</button>
+      </div>
+    </div>
+  </form>
 </div>
