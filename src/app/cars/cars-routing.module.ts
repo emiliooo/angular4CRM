@@ -17,6 +17,4 @@ const CARS_ROUTERS: Route[] = [
     ]
 })
 
-export class CarsRoutingModule () {
-
-}
+export class CarsRoutingModule  {}
