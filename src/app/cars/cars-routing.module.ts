@@ -5,7 +5,7 @@ import { RouterModule, Route } from '@angular/router';
 
 const CARS_ROUTERS: Route[] = [
     // { path: 'cars/:id', component: <any> CarsListComponent }
-]
+];
 
 
 @NgModule({
@@ -17,6 +17,4 @@ const CARS_ROUTERS: Route[] = [
     ]
 })
 
-export class CarsRoutingModule () {
-
-}
+export class CarsRoutingModule {}

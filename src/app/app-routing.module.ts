@@ -18,6 +18,5 @@ const APP_ROUTERS: Route[] = [
     ]
 })
 
-export class AppRoutingModule  (){
+export class AppRoutingModule  {}
     
-}
