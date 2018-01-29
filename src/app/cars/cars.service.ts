@@ -7,12 +7,17 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CarsService {
+  private url = 'http://localhost:3000/cars';
 
   constructor(private http: Http) { }
 
-  getCars(): Observable <Car[]> {
-    return this.http.get('http://localhost:3000/cars')
-         .map((res) => res.json() );
+  getCars(): Observable<Car[]> {
+    return this.http.get(this.url)
+      .map((res) => res.json());
+  }
+  getCar(id: number): Observable<Car> {
+    return this.http.get(this.url + `/${id}`)
+      .map((res) => res.json());
   }
 
 }

@@ -5,8 +5,8 @@ import { RouterModule, Route } from '@angular/router';
 
 const APP_ROUTERS: Route[] = [
     { path: '', pathMatch: 'full', redirectTo: 'cars' },
-    { path: 'cars', component: <any>CarsListComponent }
-]
+    { path: 'cars', component: CarsListComponent }
+];
 
 
 @NgModule({
@@ -19,4 +19,4 @@ const APP_ROUTERS: Route[] = [
 })
 
 export class AppRoutingModule  {}
-    
+
