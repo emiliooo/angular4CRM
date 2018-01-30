@@ -4,7 +4,8 @@ import { TotalCostComponent } from '../total-cost/total-cost.component';
 import { CarsService } from '../cars.service';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
-import { FormBuilder , FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -14,7 +15,7 @@ import { FormBuilder , FormGroup} from '@angular/forms';
   providers: [CarsService]
 })
 export class CarsListComponent implements OnInit {
-  @ViewChild("totalcostRef") totalcostRef: TotalCostComponent; // wywoluje metode zagniezdzona
+  @ViewChild('totalcostRef') totalcostRef: TotalCostComponent; // wywoluje metode zagniezdzona
 
   totalCost: number;
   grossCost: number;
@@ -34,15 +35,15 @@ export class CarsListComponent implements OnInit {
 
   buildCarForm() {
     return this.formBuilder.group({
-      model: '',
+      model: ['', Validators.required],
       type: '',
-      plate: '',
+      plate: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]], // required wymagany
       deliveryDate: '',
       deadline: '',
       color: '',
       power: '',
-      clientFirstName: '',
-      clientSurname: '',
+      clientfirstName: '',
+      clientsurname: '',
       cost: '',
       isFullyDamaged: ''
     });
@@ -71,5 +72,11 @@ export class CarsListComponent implements OnInit {
     this.totalCost = this.cars
       .map((car) => car.cost)
       .reduce((prev, next) => prev + next);
+  }
+
+  addCar() {
+    this.carsService.addCar(this.carForm.value).subscribe(() => {
+      this.loadCars();
+    });
   }
 }

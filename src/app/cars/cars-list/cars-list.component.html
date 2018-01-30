@@ -24,14 +24,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let car of cars" class="row-car" (click)="goToCarDetails(car)">
+          <tr *ngFor="let car of cars; let i = index " class="row-car" (click)="goToCarDetails(car)">
             <td [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id }}</td>
             <td> {{ car.model }}</td>
             <td> {{ car.cost }}</td>
             <td> {{ car.deliveryDate }}</td>
             <td> {{ car.plate }}</td>
-            <td> {{ car.client.firstName }}</td>
-            <td> {{ car.client.surname }}</td>
+            <td> {{ car.clientfirstName }}</td>
+            <td> {{ car.clientsurname }}</td>
           </tr>
         </tbody>
       </table>
@@ -52,50 +52,69 @@
   <form [formGroup]="carForm">
     <div class="row form-group">
       <div class="col-sm-4">
-        <label for="">Modal</label>
+        <label>Model</label>
         <input formControlName="model" type="text" class="form-control" placeholder="model">
+        <p *ngIf="!carForm.get('model').valid && carForm.get('model').dirty" class="error">This field is required!</p>
       </div>
       <div class="col-sm-4">
-        <label for="">type</label>
+        <label>type</label>
         <input formControlName="type" type="text" class="form-control" placeholder="type">
       </div>
       <div class="col-sm-4">
-        <label for="">plate</label>
+        <label>plate</label>
         <input formControlName="plate" type="text" class="form-control" placeholder="plate">
+        <p *ngIf="!carForm.get('plate').valid &&  carForm.get('plate').dirty" class="error">This field is required</p>
       </div>
+      
     </div>
     <div class="row form-group">
       <div class="col-sm-4">
-        <label for="">deliveryDate</label>
+        <label>deliveryDate</label>
         <input formControlName="deliveryDate" type="text" class="form-control" placeholder="deliveryDate">
       </div>
       <div class="col-sm-4">
-        <label for="">deadline</label>
+        <label>deadline</label>
         <input formControlName="deadline" type="text" class="form-control" placeholder="deadline">
       </div>
       <div class="col-sm-4">
-        <label for="">color</label>
+        <label>color</label>
         <input formControlName="color" type="text" class="form-control" placeholder="color">
       </div>
     </div>
     <div class="row form-group">
       <div class="col-sm-4">
-        <label for="">power</label>
+        <label>power</label>
         <input formControlName="power" type="text" class="form-control" placeholder="power">
       </div>
       <div class="col-sm-4">
-        <label for="">clientFirstName</label>
-        <input formControlName="clientFirstName" type="text" class="form-control" placeholder="clientFirstName">
+        <label>clientFirstName</label>
+        <input formControlName="clientfirstName" type="text" class="form-control" placeholder="FirstName">
       </div>
       <div class="col-sm-4">
-        <label for="">clientSurname</label>
-        <input formControlName="clientSurname" type="text" class="form-control" placeholder="clientSurname">
+        <label>clientSurname</label>
+        <input formControlName="clientsurname" type="text" class="form-control" placeholder="Surname">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-6">
+        <label>cost</label>
+        <input formControlName="cost" type="text" class="form-control" placeholder="cost">
+      </div>
+      <div class="col-sm-6">
+        <label>isFullyDamaged</label>
+        <input formControlName="isFullyDamaged" type="checkbox" class="form-control" >
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button type="submit" class="btn btn-primary float-right">Add car</button>
+        <button (click) ="addCar()" [disabled]="carForm.invalid" type="submit" class="btn btn-primary float-right">Add car</button>
+        <button (click) ="carForm.reset()"  type="submit" class="btn btn-default float-right">Reset</button>
       </div>
     </div>
   </form>
+
+  <pre> {{ carForm.value | json }}</pre>
+  <pre>{{ carForm.get('model').valid | json }}</pre>
+
+
 </div>
