@@ -16,11 +16,15 @@ export class CarsService {
       .map((res) => res.json());
   }
   getCar(id: number): Observable<Car> {
-    return this.http.get(this.url + `/${id}`)
+    return this.http.get(this.url + `/${id}`)  // ODBIERANIE
       .map((res) => res.json());
   }
   addCar(data): Observable<Car> {
-    return this.http.post(this.url, data)
+    return this.http.post(this.url, data)         // wysyłanie
+      .map((res) => res.json());
+  }
+  updateCar(id: number, data): Observable<Car> {    // EDYTOWANIE
+    return this.http.put(this.url + '/${id}', data)
       .map((res) => res.json());
   }
 

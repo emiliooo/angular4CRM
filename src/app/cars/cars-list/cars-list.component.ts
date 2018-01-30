@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providers: [CarsService]
 })
 export class CarsListComponent implements OnInit {
-  @ViewChild("totalcostRef") totalcostRef: TotalCostComponent; // wywoluje metode zagniezdzona
+  @ViewChild('totalcostRef') totalcostRef: TotalCostComponent; // wywoluje metode zagniezdzona
 
   totalCost: number;
   grossCost: number;
@@ -42,8 +42,8 @@ export class CarsListComponent implements OnInit {
       deadline: '',
       color: '',
       power: '',
-      clientFirstName: '',
-      clientSurname: '',
+      clientfirstName: '',
+      clientsurname: '',
       cost: '',
       isFullyDamaged: ''
     });

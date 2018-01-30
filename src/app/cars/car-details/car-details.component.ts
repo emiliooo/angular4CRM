@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarsService } from '../cars.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from '../models/car';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-car-details',
@@ -9,15 +10,18 @@ import { Car } from '../models/car';
   styleUrls: ['./car-details.component.less']
 })
 export class CarDetailsComponent implements OnInit {
-
   car: Car;
- 
+  carForm: FormGroup;
+
   constructor(private carsService: CarsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
     this.loadCar();
+    this.carForm = this.buildCarForm();
   }
 
   loadCar() {
@@ -25,6 +29,27 @@ export class CarDetailsComponent implements OnInit {
 
     this.carsService.getCar(id).subscribe((car) => {
       this.car = car;
+    });
+  }
+  buildCarForm() {
+    return this.formBuilder.group({
+      model: ['', Validators.required],
+      type: '',
+      plate: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]], // required wymagany
+      deliveryDate: '',
+      deadline: '',
+      color: '',
+      power: '',
+      clientfirstName: '',
+      clientsurname: '',
+      cost: '',
+      isFullyDamaged: ''
+    });
+  }
+
+  updateCar() {
+    this.carsService.updateCar(this.car.id , this.carForm.value).subscribe(() => {
+      this.router.navigate(['/cars']);
     });
   }
 
