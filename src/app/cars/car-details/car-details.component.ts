@@ -15,8 +15,8 @@ export class CarDetailsComponent implements OnInit {
 
   constructor(private carsService: CarsService,
     private route: ActivatedRoute,
-    private router: Router,
     private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,30 +25,27 @@ export class CarDetailsComponent implements OnInit {
   }
 
   loadCar() {
-    const id = +this.route.snapshot.params['id'];
-
-    this.carsService.getCar(id).subscribe((car) => {
-      this.car = car;
-    });
+    this.car = this.route.snapshot.data['car'];
   }
+
   buildCarForm() {
     return this.formBuilder.group({
-      model: ['', Validators.required],
-      type: '',
-      plate: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]], // required wymagany
-      deliveryDate: '',
-      deadline: '',
-      color: '',
-      power: '',
-      clientfirstName: '',
-      clientsurname: '',
-      cost: '',
-      isFullyDamaged: ''
+      model: [this.car.model, Validators.required],
+      type: this.car.type,
+      plate: [this.car.plate, [Validators.required, Validators.minLength(3), Validators.maxLength(7)]], // required wymagany
+      deliveryDate: this.car.deliveryDate,
+      deadline: this.car.deadline,
+      color: this.car.color,
+      power: this.car.power,
+      clientfirstName: this.car.clientFirstName,
+      clientsurname: this.car.clientSurname,
+      cost: this.car.cost,
+      isFullyDamaged: this.car.isFullyDamaged
     });
   }
 
   updateCar() {
-    this.carsService.updateCar(this.car.id , this.carForm.value).subscribe(() => {
+    this.carsService.updateCar(this.car.id, this.carForm.value).subscribe(() => {
       this.router.navigate(['/cars']);
     });
   }

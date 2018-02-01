@@ -1,4 +1,4 @@
-<app-header>
+ <app-header>
     <div header>
         <p>Model samochodu {{car.model}} </p>
      </div>
@@ -9,7 +9,7 @@
 
 <div class="data-header">Edit  {{car.model}} </div>
 
-<div class="data-container">
+<!-- <div class="data-container">
   <form [formGroup]="carForm">
     <div class="row form-group">
       <div class="col-sm-4">
@@ -74,3 +74,6 @@
   </form>
 
 </div>
+
+<pre> {{ carForm.value | json }}</pre>
+<pre>{{ carForm.get('model').valid | json }}</pre> -->
