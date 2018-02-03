@@ -25,13 +25,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let car of cars; let i = index " class="row-car" (click)="goToCarDetails(car)">
-            <td [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id }}</td>
-            <td> {{ car.model }}</td>
-            <td> {{ car.cost }}</td>
-            <td> {{ car.deliveryDate }}</td>
+            <td  [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id  }}</td>
+            <td appImportant > {{ car.model | uppercase }}</td>  
+             <!-- WŁASNA DYREKTYWA -->
+            <td appImportant > {{ car.cost | currency:'PLN'}}</td>
+            <td> {{ car.deliveryDate  }}</td>
             <td> {{ car.plate }}</td>
             <td> {{ car.clientfirstName }}</td>
-            <td> {{ car.clientsurname }}</td>
+            <td> {{ car.clientsurname | surnameShortcut }}</td>
           </tr>
         </tbody>
       </table>
@@ -42,8 +43,8 @@
   </ng-template>
 
   <app-total-cost #totalcostRef [totalCost]="totalCost" (shownGross)="shownGross($event)"></app-total-cost>
-  <!-- <button (click)=s howGross()>showGross</button>
-  <p>{{ grossCost }}</p> -->
+  <button (click) = showGross()>showGross</button>
+  <p>{{ grossCost }}</p>
 </div>
 
 <div class="data-header">Add a new car</div>
@@ -84,7 +85,7 @@
     <div class="row form-group">
       <div class="col-sm-4">
         <label>power</label>
-        <input formControlName="power" type="text" class="form-control" placeholder="power">
+        <input formControlName="power" type="number" class="form-control" placeholder="power">
       </div>
       <div class="col-sm-4">
         <label>clientFirstName</label>
@@ -98,7 +99,7 @@
     <div class="row form-group">
       <div class="col-sm-6">
         <label>cost</label>
-        <input formControlName="cost" type="text" class="form-control" placeholder="cost">
+        <input formControlName="cost" type="number" class="form-control" placeholder="cost">
       </div>
       <div class="col-sm-6">
         <label>isFullyDamaged</label>

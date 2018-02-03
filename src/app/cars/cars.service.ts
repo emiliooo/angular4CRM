@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CarsService {
   private url = 'http://localhost:3000/cars';
+  randomValue = Math.random();
 
   constructor(private http: Http) { }
 
