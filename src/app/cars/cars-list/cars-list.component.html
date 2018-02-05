@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let car of cars; let i = index " class="row-car" (click)="goToCarDetails(car)">
-            <td  [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id  }}</td>
+            <td  [ngClass]="{'row-error':car.isFullyDamaged}"> {{ car.id  }}<3/td>
             <td appImportant > {{ car.model | uppercase }}</td>  
              <!-- WŁASNA DYREKTYWA -->
             <td appImportant > {{ car.cost | currency:'PLN'}}</td>
@@ -33,6 +33,7 @@
             <td> {{ car.plate }}</td>
             <td> {{ car.clientfirstName }}</td>
             <td> {{ car.clientsurname | surnameShortcut }}</td>
+            <td (click)="removeCar(car, $event)"> ( X )</td>
           </tr>
         </tbody>
       </table>

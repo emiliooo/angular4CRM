@@ -18,7 +18,6 @@ export class CarsListComponent implements OnInit {
 
   totalCost: number;
   grossCost: number;
-  to: any;
 
   total: number;
   cars: Car[] = [];
@@ -27,13 +26,11 @@ export class CarsListComponent implements OnInit {
   constructor(private carsService: CarsService,
     private formBuilder: FormBuilder,
     private router: Router) {
-    console.log(this.carsService.randomValue, 'CarsListComponent');
   }
 
   ngOnInit() {
     this.loadCars();
     this.carForm = this.buildCarForm();
-
   }
 
   buildCarForm() {
@@ -52,17 +49,22 @@ export class CarsListComponent implements OnInit {
     });
   }
 
-
   loadCars(): void {
     this.carsService.getCars().subscribe((cars) => {
       this.cars = cars;
       this.countTotalCost();
-      console.log( this.to);
     });
   }
 
   goToCarDetails(car: Car) {
     this.router.navigate(['/cars', car.id]);
+  }
+  
+  removeCar(car: Car, event) {
+    event.stopPropagation();  // zablokuje inne zdarzenia po wywolaniu removeCar
+    this.carsService.removeCar(car.id).subscribe(() => {
+      this.loadCars();
+    });
   }
 
   showGross() {
@@ -80,12 +82,6 @@ export class CarsListComponent implements OnInit {
       .reduce((prev, next) => prev + next);
   }
 
-  test() {
-  // this.to =  this.cars.reduce(function (acc, obj) {
-  //     return acc + obj.cost;
-  //   }, 0);
-  this.to = this.cars.map((car) => car.cost  );
-  }
 
   addCar() {
     this.carsService.addCar(this.carForm.value).subscribe(() => {

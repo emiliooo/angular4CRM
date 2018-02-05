@@ -9,6 +9,15 @@
 
 <div class="data-header">Edit  {{car.model}} </div>
 
+  <form [formGroup]="carForm">
+        <label>Model</label>
+        <input formControlName="model" type="text" class="form-control" placeholder="model">
+  </form>
+
+
+
+
+
 <!-- <div class="data-container">
   <form [formGroup]="carForm">
     <div class="row form-group">
@@ -73,7 +82,7 @@
     </div>
   </form>
 
-</div>
+</div> -->
 
 <pre> {{ carForm.value | json }}</pre>
-<pre>{{ carForm.get('model').valid | json }}</pre> -->
+<pre>{{ carForm.get('model').valid | json }}</pre>
